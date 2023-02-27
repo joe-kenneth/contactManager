@@ -59,12 +59,45 @@ public class ContactApplication {
                 System.out.println(name);
                 Contact contact = new Contact(name, phoneNumDashes);
                 contactList.add(contact);
+                String tempString = contact.getName() + "," + contact.getPhoneNumber();
+                contactFile.add(tempString);
             } else if (userInput == 3) {
-
+                int exists = 1;
+                System.out.println("Enter the name you want to search for");
+                String nameSearch = scan.nextLine();
+                for (Contact nameTemp : contactList){
+                    if (nameSearch.equals(nameTemp.getName()) ) {
+                        System.out.println("The phone number for " + nameTemp.getName() + " is " + nameTemp.getPhoneNumber());
+                        exists = 0;
+                        break;
+                    }
+                }
+                if (exists == 1){
+                    System.out.println("The contact " + nameSearch + " does not exist.");
+                }
             }else if (userInput == 4) {
-
+                int exists = 1;
+                System.out.println("Enter the name you want to delete");
+                String nameSearch = scan.nextLine();
+                for (Contact nameTemp : contactList){
+                    if (nameSearch.equals(nameTemp.getName()) ) {
+                        contactList.remove(nameTemp);
+                        System.out.println("The contact " + nameTemp.getName() + " has been deleted.");
+                        exists = 0;
+                        break;
+                    }
+                }
+                if (exists == 1){
+                    System.out.println("The contact " + nameSearch + " does not exist.");
+                }
             }else if (userInput == 5) {
                 System.out.println("You are exiting the program. Goodbye!");
+
+                try {
+                    Files.write(contactsPath, contactFile);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             }
             else {
