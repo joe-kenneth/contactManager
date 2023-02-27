@@ -48,8 +48,12 @@ public class ContactApplication {
                 System.out.println("This is not a correct input. Try again punk!");
             }
         }
-    }
+    }//End of Main method
 
+    /**
+     * The callMenu method takes in a Scanner object and prints the contact menu.
+     * This method returns an int that was obtained from the user input.
+     **/
     public static int callMenu(Scanner scan){
         System.out.print("""
                     
@@ -62,6 +66,8 @@ public class ContactApplication {
                     """);
         return Integer.parseInt(scan.nextLine());
     }
+
+    //The viewContacts method takes in and prints out our contacts lists.
     public static void viewContacts(ArrayList<Contact> contactList){
         System.out.println("Name | Phone Number");
         System.out.println("----------------------------");
@@ -69,6 +75,12 @@ public class ContactApplication {
             System.out.println(contact.getName() + " | " + contact.getPhoneNumber());
         }
     }
+
+    /**
+     * The addContact method prompts the user for a new contact name and phone number.
+     * The user input is checked for the correct phone number length.  The user will be prompted until the correct length is inputted.
+     * The new contact and number is added to the contact list.
+     **/
     public static void addContact(ArrayList<Contact> contactList, Scanner scan, List<String> contactFile){
         System.out.println("Enter your name");
         String name = scan.nextLine();
@@ -92,6 +104,10 @@ public class ContactApplication {
         contactFile.add(tempString);
     }
 
+    /**
+     * The searchContact method searches the contact list for the users entered contact.
+     * If the user inputs a contact that isn't listed, they are notified that the contact doesn't exist.
+     **/
     public static void searchContact(Scanner scan, ArrayList<Contact> contactList){
         int exists = 1;
         System.out.println("Enter the name you want to search for");
@@ -108,6 +124,11 @@ public class ContactApplication {
         }
     }
 
+    /**
+     * The deleteContact method prompts the user for a name of a contact to be deleted.
+     * If the contact provided is in the contact list, we delete the contact.
+     * If the user inputs a contact that isn't listed, they are notified that the contact doesn't exist.
+     **/
     public static void deleteContact(Scanner scan, ArrayList<Contact> contactList, List<String> contactFile){
         int exists = 1;
         int index = 0;
@@ -128,6 +149,8 @@ public class ContactApplication {
         }
     }
 
+
+    //The exitMenu Method will exit the program when selected, and it will write to the contacts.txt data file.
     public static void exitMenu(Path contactsPath, List<String> contactFile){
         System.out.println("You are exiting the program. Goodbye!");
 
@@ -138,6 +161,11 @@ public class ContactApplication {
         }
     }
 
+    /**
+     * The readFile Method takes in the contacts' data,
+     * parses the data into Contact objects,
+     * and stores the contacts into the contacts list.
+     **/
     public static void readFile(List<String> contactFile, ArrayList<Contact> contactList){
         for (String contactInfo : contactFile){
             String [] result = contactInfo.split(",");
